@@ -34,7 +34,9 @@
 			<div class="col-sm-12">
 				<div class="form-group">
 					<label for="smtp:password">Password</label>
-					<input type="text" class="form-control" id="smtp:password" data-field="smtp:password" />
+					<!-- Only after https://github.com/designcreateplay/NodeBB/commit/6f129d9c68f998c9de08618c9b56f06f6841abd7 -->
+					<input type="password" class="form-control" id="smtp:password" data-field="smtp:password" />
+					<!-- If you're using an older commit, use type="text". Or pulling the up-to-date version would be even better ;) -->
 				</div>
 			</div>
 		</div>
