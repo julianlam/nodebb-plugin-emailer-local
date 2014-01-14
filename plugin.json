@@ -1,0 +1,12 @@
+{
+    "id": "nodebb-plugin-emailer-local",
+    "url": "https://github.com/AlfredDobradi/nodebb-plugin-emailer-local",
+    "name": "Emailer (Local)",
+    "description": "Allows NodeBB to send emails via SMTP",
+    "library": "./index.js",
+    "hooks": [
+        { "hook": "action:email.send", "method": "send" },
+        { "hook": "filter:admin.header.build", "method": "admin.menu", "callbacked": false },
+        { "hook": "filter:admin.create_routes", "method": "admin.route", "callbacked": true }
+    ]
+}
