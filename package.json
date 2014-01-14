@@ -1,0 +1,6 @@
+{
+    "dependencies": {
+        "nodemailer": "latest",
+        "path": "latest"
+    }
+}
