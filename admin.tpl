@@ -16,7 +16,7 @@
 			<div class="col-sm-12">
 				<div class="form-group">
 					<label for="emailer:local:host">Host</label>
-					<input type="text" class="form-control" id="smtp:host" data-field="smtp:host" />
+					<input type="text" class="form-control" id="emailer:local:host" data-field="emailer:local:host" />
 				</div>
 			</div>
 			<div class="col-sm-12">
