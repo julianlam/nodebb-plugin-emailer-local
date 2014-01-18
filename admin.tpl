@@ -1,9 +1,9 @@
-<h1><i class="fa fa-envelope-o"></i> Emailer (SMTP)</h1>
+<h1><i class="fa fa-envelope-o"></i> Emailer (Local)</h1>
 
 <div class="row">
 	<div class="col-lg-12">
 		<blockquote>
-			This plugin lets NodeBB send emails via an SMTP interface. The configuration is pretty straightforward.
+			This plugin lets NodeBB send emails via an SMTP interface.
 		</blockquote>
 	</div>
 </div>
@@ -15,27 +15,27 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="form-group">
-					<label for="smtp:host">Host</label>
+					<label for="emailer:local:host">Host</label>
 					<input type="text" class="form-control" id="smtp:host" data-field="smtp:host" />
 				</div>
 			</div>
 			<div class="col-sm-12">
 				<div class="form-group">
-					<label for="smtp:port">User</label>
-					<input type="text" class="form-control" value="25" id="smtp:port" data-field="smtp:port" />
+					<label for="emailer:local:port">User</label>
+					<input type="text" class="form-control" value="25" id="emailer:local:port" data-field="emailer:local:port" />
 				</div>
 			</div>
 			<div class="col-sm-12">
 				<div class="form-group">
-					<label for="smtp:username">User</label>
-					<input type="text" class="form-control" id="smtp:username" data-field="smtp:username" />
+					<label for="emailer:local:username">User</label>
+					<input type="text" class="form-control" id="emailer:local:username" data-field="emailer:local:username" />
 				</div>
 			</div>
 			<div class="col-sm-12">
 				<div class="form-group">
-					<label for="smtp:password">Password</label>
+					<label for="emailer:local:password">Password</label>
 					<!-- Only after https://github.com/designcreateplay/NodeBB/commit/6f129d9c68f998c9de08618c9b56f06f6841abd7 -->
-					<input type="password" class="form-control" id="smtp:password" data-field="smtp:password" />
+					<input type="password" class="form-control" id="emailer:local:password" data-field="emailer:local:password" />
 					<!-- If you're using an older commit, use type="text". Or pulling the up-to-date version would be even better ;) -->
 				</div>
 			</div>
