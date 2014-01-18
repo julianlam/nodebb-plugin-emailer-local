@@ -8,16 +8,12 @@ var fs = require('fs'),
     Emailer = {};
 
 Emailer.send = function(data) {
-    // Update the API key, if necessary
-    // if (PostageApp.getApiKey && PostageApp.setApiKey && PostageApp.getApiKey() !== Meta.config['postageapp:apiKey']) {
-    //  PostageApp.setApiKey(Meta.config['postageapp:apiKey']);
-    // }
-
     var transport = nodemailer.createTransport('SMTP',{
-        host: Meta.config['smtp:host'],
+        host: Meta.config['emailer:local:host'],
+        port: Meta.config['emailer:local:port'],
         auth: {
-            user: Meta.config['smtp:username'],
-            pass: Meta.config['smtp:password'],
+            user: Meta.config['emailer:local:username'],
+            pass: Meta.config['emailer:local:password'],
         }
     });
 
@@ -42,7 +38,7 @@ Emailer.admin = {
         custom_header.plugins.push({
             "route": '/plugins/emailer-smtp',
             "icon": 'fa-envelope-o',
-            "name": 'Emailer (SMTP)'
+            "name": 'Emailer (Local)'
         });
 
         return custom_header;
@@ -57,7 +53,7 @@ Emailer.admin = {
                         req: req,
                         res: res,
                         route: '/plugins/emailer-smtp',
-                        name: 'Emailer (SMTP)',
+                        name: 'Emailer (Local)',
                         content: tpl
                     });
                 }
