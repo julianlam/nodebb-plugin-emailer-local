@@ -44,7 +44,7 @@ Emailer.send = function(data) {
 }
 
 Emailer.admin = {
-    menu: function(custom_header) {
+    menu: function(custom_header, callback) {
         custom_header.plugins.push({
             "route": '/emailers/local',
             "icon": 'fa-envelope-o',
