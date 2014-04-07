@@ -44,14 +44,14 @@ Emailer.send = function(data) {
 }
 
 Emailer.admin = {
-    menu: function(custom_header, callback) {
+    menu: function(custom_header) {
         custom_header.plugins.push({
             "route": '/emailers/local',
             "icon": 'fa-envelope-o',
             "name": 'Emailer (Local)'
         });
 
-        return custom_header;
+        callback(null, custom_header);
     }
 };
 
