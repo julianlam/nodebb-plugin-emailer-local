@@ -18,14 +18,19 @@ Emailer.init = function(app, middleware, controllers) {
 };
 
 Emailer.send = function(data) {
-    var transport = nodemailer.createTransport('SMTP',{
+    var username = Meta.config['emailer:local:username'];
+    var pass = Meta.config['emailer:local:password'];
+    var transportOptions = {
         host: Meta.config['emailer:local:host'],
-        port: Meta.config['emailer:local:port'],
-        auth: {
-            user: Meta.config['emailer:local:username'],
-            pass: Meta.config['emailer:local:password'],
-        }
-    });
+        port: Meta.config['emailer:local:port']
+    };
+    if( username || pass ) {
+        transportOptions.auth = {
+            user: username,
+            pass: pass
+        };
+    }
+    var transport = nodemailer.createTransport('SMTP', transportOptions);
 
     transport.sendMail({
         from: data.from,
