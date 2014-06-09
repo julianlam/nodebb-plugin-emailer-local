@@ -8,9 +8,9 @@
         "emailer",
         "smtp"
     ],
-    "homepage": "https://github.com/AlfredDobradi/nodebb-plugin-emailer-local",
+    "homepage": "https://github.com/NodeBB/nodebb-plugin-emailer-local",
     "bugs": {
-        "url": "http://github.com/AlfredDobradi/nodebb-plugin-emailer-local/issues",
+        "url": "http://github.com/NodeBB/nodebb-plugin-emailer-local/issues",
         "email": "alfred@brvy.me"
     },
     "license": "MIT",
@@ -26,6 +26,6 @@
     "main": "index.js",
     "repository": {
         "type": "git",
-        "url": "https://github.com/AlfredDobradi/nodebb-plugin-emailer-local.git"
+        "url": "https://github.com/NodeBB/nodebb-plugin-emailer-local.git"
     }
 }
