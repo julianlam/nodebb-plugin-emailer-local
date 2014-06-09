@@ -7,15 +7,30 @@ var fs = require('fs'),
     nodemailer = require('nodemailer'),
     Emailer = {};
 
+
+Emailer.init = function(app, middleware, controllers) {
+    function renderAdminPage(req, res, next) {
+        res.render('admin/emailers/local', {});
+    }
+
+    app.get('/admin/emailers/local', middleware.admin.buildHeader, renderAdminPage);
+    app.get('/api/admin/emailers/local', renderAdminPage);
+};
+
 Emailer.send = function(data) {
-    var transport = nodemailer.createTransport('SMTP',{
+    var username = Meta.config['emailer:local:username'];
+    var pass = Meta.config['emailer:local:password'];
+    var transportOptions = {
         host: Meta.config['emailer:local:host'],
-        port: Meta.config['emailer:local:port'],
-        auth: {
-            user: Meta.config['emailer:local:username'],
-            pass: Meta.config['emailer:local:password'],
-        }
-    });
+        port: Meta.config['emailer:local:port']
+    };
+    if( username || pass ) {
+        transportOptions.auth = {
+            user: username,
+            pass: pass
+        };
+    }
+    var transport = nodemailer.createTransport('SMTP', transportOptions);
 
     transport.sendMail({
         from: data.from,
@@ -36,31 +51,12 @@ Emailer.send = function(data) {
 Emailer.admin = {
     menu: function(custom_header, callback) {
         custom_header.plugins.push({
-            "route": '/plugins/emailer-smtp',
+            "route": '/emailers/local',
             "icon": 'fa-envelope-o',
             "name": 'Emailer (Local)'
         });
 
-        return custom_header;
-    },
-    route: function(custom_routes, callback) {
-        fs.readFile(path.join(__dirname, 'admin.tpl'), function(err, tpl) {
-            custom_routes.routes.push({
-                route: '/plugins/emailer-smtp',
-                method: "get",
-                options: function(req, res, callback) {
-                    callback({
-                        req: req,
-                        res: res,
-                        route: '/plugins/emailer-smtp',
-                        name: 'Emailer (Local)',
-                        content: tpl
-                    });
-                }
-            });
-
-            callback(null, custom_routes);
-        });
+        callback(null, custom_header);
     }
 };
 
