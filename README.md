@@ -30,7 +30,7 @@ Features to add
 DKIM signatures  
 Popular services (Gmail, Hotmail, etc.)
 
-Credis
+Credits
 ---
 
 **Original Author**: [AlfredDobradi](https://github.com/AlfredDobradi)
