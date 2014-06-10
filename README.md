@@ -10,7 +10,7 @@ Installation
 
 ``` bash
 cd /nodebb/install/path
-npm install nodebb-plugin-emailer-local
+npm install git://github.com/psychobunny/nodebb-plugin-emailer-local
 ```
 
 * Then enable the plugin in NodeBB's Admin Control Panel in the Plugins tab.
