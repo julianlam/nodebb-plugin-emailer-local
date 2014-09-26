@@ -10,32 +10,32 @@
 
 <hr />
 
-<form role="form">
+<form role="form" class="emailer-local-settings">
 	<fieldset>
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="form-group">
 					<label for="emailer:local:host">Host</label>
-					<input type="text" class="form-control" id="emailer:local:host" data-field="emailer:local:host" />
+					<input type="text" class="form-control" id="emailer:local:host" name="emailer:local:host" />
 				</div>
 			</div>
 			<div class="col-sm-12">
 				<div class="form-group">
 					<label for="emailer:local:port">Port</label>
-					<input type="text" class="form-control" value="25" id="emailer:local:port" data-field="emailer:local:port" />
+					<input type="text" class="form-control" value="25" id="emailer:local:port" name="emailer:local:port" />
 				</div>
 			</div>
 			<div class="col-sm-12">
 				<div class="form-group">
 					<label for="emailer:local:username">User</label>
-					<input type="text" class="form-control" id="emailer:local:username" data-field="emailer:local:username" />
+					<input type="text" class="form-control" id="emailer:local:username" name="emailer:local:username" />
 				</div>
 			</div>
 			<div class="col-sm-12">
 				<div class="form-group">
 					<label for="emailer:local:password">Password</label>
 					<!-- Only after https://github.com/designcreateplay/NodeBB/commit/6f129d9c68f998c9de08618c9b56f06f6841abd7 -->
-					<input type="password" class="form-control" id="emailer:local:password" data-field="emailer:local:password" />
+					<input type="password" class="form-control" id="emailer:local:password" name="emailer:local:password" />
 					<!-- If you're using an older commit, use type="text". Or pulling the up-to-date version would be even better ;) -->
 				</div>
 			</div>
@@ -46,7 +46,22 @@
 </form>
 
 <script type="text/javascript">
-	require(['forum/admin/settings'], function(Settings) {
-		Settings.prepare();
+	require(['settings'], function(Settings) {
+		Settings.load('emailer-local', $('.emailer-local-settings'));
+
+		$('#save').on('click', function() {
+			Settings.save('emailer-local', $('.emailer-local-settings'), function() {
+				app.alert({
+					alert_id: 'emailer-local',
+					type: 'info',
+					title: 'Settings Changed',
+					message: 'Please reload your NodeBB to apply these changes',
+					timeout: 5000,
+					clickfn: function() {
+						socket.emit('admin.reload');
+					}
+				});
+			});
+		});
 	});
 </script>
