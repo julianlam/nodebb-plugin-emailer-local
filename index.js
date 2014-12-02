@@ -8,13 +8,13 @@ var fs = require('fs'),
     Emailer = {};
 
 
-Emailer.init = function(app, middleware, controllers) {
+Emailer.init = function(params, callback) {
     function renderAdminPage(req, res, next) {
         res.render('admin/emailers/local', {});
     }
 
-    app.get('/admin/emailers/local', middleware.admin.buildHeader, renderAdminPage);
-    app.get('/api/admin/emailers/local', renderAdminPage);
+    params.router.get('/admin/emailers/local', params.middleware.admin.buildHeader, renderAdminPage);
+    params.router.get('/api/admin/emailers/local', renderAdminPage);
 };
 
 Emailer.send = function(data) {
