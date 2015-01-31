@@ -27,5 +27,8 @@
     "repository": {
         "type": "git",
         "url": "https://github.com/NodeBB/nodebb-plugin-emailer-local.git"
+    },
+    "nbbpm": {
+        "compatibility": "^0.5.0"
     }
 }
