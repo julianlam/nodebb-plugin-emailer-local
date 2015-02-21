@@ -1,4 +1,4 @@
-nodebb-plugin-emailer-local-yandex
+nodebb-plugin-emailer-yandex
 ===========================
 
 NodeBB plugin for sending emails via Yandex SMTP service
@@ -10,7 +10,7 @@ Installation
 
 ``` bash
 cd /nodebb/install/path
-npm install git://github.com/MegaGM/nodebb-plugin-emailer-local-yandex
+npm install git://github.com/MegaGM/nodebb-plugin-emailer-yandex
 ```
 
 * Then enable the plugin in NodeBB's Admin Control Panel in the Plugins tab.
