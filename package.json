@@ -1,11 +1,12 @@
 {
 	"name": "nodebb-plugin-emailer-local-yandex",
-	"version": "0.2.1",
+	"version": "0.2.2",
 	"description": "NodeBB plugin to send emails via Yandex SMTP service",
 	"keywords": [
 		"nodebb",
 		"email",
 		"emailer",
+		"yandex",
 		"smtp"
 	],
 	"homepage": "https://github.com/MegaGM/nodebb-plugin-emailer-local-yandex",
@@ -21,7 +22,7 @@
 	},
 	"dependencies": {
 		"nodemailer": "^1.x",
-		"path": "^0.11.x"
+		"nodemailer-smtp-transport": "1.0.0"
 	},
 	"main": "index.js",
 	"repository": {

@@ -15,14 +15,14 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="form-group">
-					<label for="emailer:local-yandex:username">User</label>
-					<input type="text" class="form-control" id="emailer:local-yandex:username" name="emailer:local-yandex:username" />
+					<label for="username">User</label>
+					<input type="text" class="form-control" id="username" name="username" />
 				</div>
 			</div>
 			<div class="col-sm-12">
 				<div class="form-group">
-					<label for="emailer:local-yandex:password">Password</label>
-					<input type="password" class="form-control" id="emailer:local-yandex:password" name="emailer:local-yandex:password" />
+					<label for="password">Password</label>
+					<input type="password" class="form-control" id="password" name="password" />
 				</div>
 			</div>
 		</div>
