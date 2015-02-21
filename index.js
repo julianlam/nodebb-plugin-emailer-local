@@ -1,5 +1,6 @@
 var winston = require.main.require('winston'),
 	Meta = require.main.require('./src/meta'),
+	Settings = require.main.require('./src/settings'),
 
 	nodemailer = require('nodemailer'),
 	smtpTransport = require('nodemailer-smtp-transport'),
@@ -19,38 +20,42 @@ Emailer.init = function(data, callback) {
 };
 
 Emailer.send = function(data) {
-	var username = Meta.config['emailer:local-yandex:username'];
-	var pass = Meta.config['emailer:local-yandex:password'];
+	var settings = new Settings('emailer-local-yandex', '0.2.2', {}, function ( ) {
+		var wrapper = settings.getWrapper(),
+			username = wrapper.username,
+			pass = wrapper.password;
 
-	if ( !username || !pass ) {
-		winston.error('[Yandex Emailer]' + 'Username and Password are required but not presented');
-	}
-
-	var options = {
-		debug: true,
-		host: 'smtp.yandex.ru',
-		port: 465,
-		secure: true,
-		auth: {
-			user: username,
-			pass: pass
+		if ( !username || !pass ) {
+			winston.error('[Yandex Emailer] Username and Password are required but not presented');
 		}
-	};
 
-	var transport = nodemailer.createTransport(smtpTransport(options));
-	transport.sendMail({
-		from: data.from,
-		to: data.to,
-		html: data.html,
-		text: data.plaintext,
-		subject: data.subject
-	}, function(err, res) {
-		if (!err) {
-			winston.info('[Yandex Emailer] Sent `' + data.template + '` email to uid ' + data.uid);
-		} else {
-			winston.error('[Yandex Emailer] Unable to send `' + data.template + '` email to uid ' + data.uid + '!!' + ' The error: ' + err);
-			// winston.error('[emailer.smtp] ' + response.message);
-		}
+		var options = {
+			debug: true,
+			host: 'smtp.yandex.ru',
+			port: 465,
+			secure: true,
+			auth: {
+				user: username,
+				pass: pass
+			}
+		};
+
+		var transport = nodemailer.createTransport(smtpTransport(options));
+
+		transport.sendMail({
+			from: data.from,
+			to: data.to,
+			html: data.html,
+			text: data.plaintext,
+			subject: data.subject
+		}, function(err, res) {
+			if (err) {
+				winston.error('[Yandex Emailer] Unable to send `' + data.template + '` email to uid ' + data.uid + '!!' + ' The error: ' + err);
+			} else {
+				winston.info('[Yandex Emailer] Sent `' + data.template + '` email to uid ' + data.uid);
+			}
+		});
+
 	});
 }
 
