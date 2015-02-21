@@ -1,9 +1,9 @@
-<h1><i class="fa fa-envelope-o"></i> Emailer (Local)</h1>
+<h1><i class="fa fa-envelope-o"></i> Yandex Emailer</h1>
 
 <div class="row">
 	<div class="col-lg-12">
 		<blockquote>
-			This plugin lets NodeBB send emails via an SMTP interface.
+			This plugin lets NodeBB send emails via Yandex SMTP.
 		</blockquote>
 	</div>
 </div>
@@ -15,8 +15,8 @@
 		<div class="row">
 			<div class="col-sm-12">
 				<div class="form-group">
-					<label for="username">User</label>
-					<input type="text" class="form-control" id="username" name="username" />
+					<label for="username">Username (full email address)</label>
+					<input type="text" class="form-control" id="username" name="username" placeholder="login@mydomain.tld" />
 				</div>
 			</div>
 			<div class="col-sm-12">
@@ -35,7 +35,8 @@
 	require(['settings'], function(Settings) {
 		Settings.load('emailer-local-yandex', $('.emailer-local-yandex-settings'));
 
-		$('#save').on('click', function() {
+		$('#save').on('click', function(e) {
+			e.preventDefault();
 			Settings.save('emailer-local-yandex', $('.emailer-local-yandex-settings'), function() {
 				app.alert({
 					alert_id: 'emailer-local-yandex',
