@@ -10,17 +10,17 @@ var winston = require.main.require('winston'),
 
 Emailer.init = function(data, callback) {
 	function renderAdminPage(req, res, next) {
-		res.render('admin/emailers/local-yandex', {});
+		res.render('admin/emailers/yandex', {});
 	}
 
-	data.router.get('/admin/emailers/local-yandex', data.middleware.admin.buildHeader, renderAdminPage);
-	data.router.get('/api/admin/emailers/local-yandex', renderAdminPage);
+	data.router.get('/admin/emailers/yandex', data.middleware.admin.buildHeader, renderAdminPage);
+	data.router.get('/api/admin/emailers/yandex', renderAdminPage);
 
 	callback();
 };
 
 Emailer.send = function(data) {
-	var settings = new Settings('emailer-local-yandex', '0.2.2', {}, function ( ) {
+	var settings = new Settings('emailer-yandex', '0.2.2', {}, function ( ) {
 		var wrapper = settings.getWrapper(),
 			username = wrapper.username,
 			pass = wrapper.password;
@@ -66,7 +66,7 @@ Emailer.send = function(data) {
 Emailer.admin = {
 	menu: function(custom_header, callback) {
 		custom_header.plugins.push({
-			"route": '/emailers/local-yandex',
+			"route": '/emailers/yandex',
 			"icon": 'fa-envelope-o',
 			"name": 'Yandex Emailer'
 		});

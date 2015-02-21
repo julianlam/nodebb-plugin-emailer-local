@@ -1,6 +1,6 @@
 {
-	"name": "nodebb-plugin-emailer-local-yandex",
-	"version": "0.2.2",
+	"name": "nodebb-plugin-emailer-yandex",
+	"version": "0.2.3",
 	"description": "NodeBB plugin to send emails via Yandex SMTP service",
 	"keywords": [
 		"nodebb",
@@ -9,9 +9,9 @@
 		"yandex",
 		"smtp"
 	],
-	"homepage": "https://github.com/MegaGM/nodebb-plugin-emailer-local-yandex",
+	"homepage": "https://github.com/MegaGM/nodebb-plugin-emailer-yandex",
 	"bugs": {
-		"url": "https://github.com/MegaGM/nodebb-plugin-emailer-local-yandex/issues",
+		"url": "https://github.com/MegaGM/nodebb-plugin-emailer-yandex/issues",
 		"email": "alfred@brvy.me"
 	},
 	"license": "MIT",

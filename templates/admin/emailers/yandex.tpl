@@ -10,7 +10,7 @@
 
 <hr />
 
-<form role="form" class="emailer-local-yandex-settings">
+<form role="form" class="emailer-yandex-settings">
 	<fieldset>
 		<div class="row">
 			<div class="col-sm-12">
@@ -33,13 +33,13 @@
 
 <script type="text/javascript">
 	require(['settings'], function(Settings) {
-		Settings.load('emailer-local-yandex', $('.emailer-local-yandex-settings'));
+		Settings.load('emailer-yandex', $('.emailer-yandex-settings'));
 
 		$('#save').on('click', function(e) {
 			e.preventDefault();
-			Settings.save('emailer-local-yandex', $('.emailer-local-yandex-settings'), function() {
+			Settings.save('emailer-yandex', $('.emailer-yandex-settings'), function() {
 				app.alert({
-					alert_id: 'emailer-local-yandex',
+					alert_id: 'emailer-yandex',
 					type: 'info',
 					title: 'Settings Changed',
 					message: 'Please reload your NodeBB to apply these changes',

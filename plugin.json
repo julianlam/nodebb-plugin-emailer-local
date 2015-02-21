@@ -1,6 +1,6 @@
 {
-	"id": "nodebb-plugin-emailer-local-yandex",
-	"url": "https://github.com/MegaGM/nodebb-plugin-emailer-local-yandex",
+	"id": "nodebb-plugin-emailer-yandex",
+	"url": "https://github.com/MegaGM/nodebb-plugin-emailer-yandex",
 	"name": "Yandex Emailer",
 	"description": "Allows NodeBB to send emails via Yandex SMTP",
 	"library": "./index.js",
