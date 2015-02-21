@@ -1,65 +1,69 @@
-var fs = require('fs'),
-    path = require('path'),
+var winston = require.main.require('winston'),
+	Meta = require.main.require('./src/meta'),
 
-    winston = module.parent.require('winston'),
-    Meta = module.parent.require('./meta'),
+	nodemailer = require('nodemailer'),
+	smtpTransport = require('nodemailer-smtp-transport'),
 
-    nodemailer = require('nodemailer'),
-    Emailer = {};
+	Emailer = {};
 
 
 Emailer.init = function(data, callback) {
-    function renderAdminPage(req, res, next) {
-        res.render('admin/emailers/local', {});
-    }
+	function renderAdminPage(req, res, next) {
+		res.render('admin/emailers/local-yandex', {});
+	}
 
-    data.router.get('/admin/emailers/local', data.middleware.admin.buildHeader, renderAdminPage);
-    data.router.get('/api/admin/emailers/local', renderAdminPage);
+	data.router.get('/admin/emailers/local-yandex', data.middleware.admin.buildHeader, renderAdminPage);
+	data.router.get('/api/admin/emailers/local-yandex', renderAdminPage);
 
-    callback();
+	callback();
 };
 
 Emailer.send = function(data) {
-    var username = Meta.config['emailer:local:username'];
-    var pass = Meta.config['emailer:local:password'];
-    var transportOptions = {
-        host: Meta.config['emailer:local:host'],
-        port: Meta.config['emailer:local:port']
-    };
-    if( username || pass ) {
-        transportOptions.auth = {
-            user: username,
-            pass: pass
-        };
-    }
-    var transport = nodemailer.createTransport('SMTP', transportOptions);
+	var username = Meta.config['emailer:local-yandex:username'];
+	var pass = Meta.config['emailer:local-yandex:password'];
 
-    transport.sendMail({
-        from: data.from,
-        to: data.to,
-        html: data.html,
-        text: data.plaintext,
-        subject: data.subject
-    },function(err,response) {
-        if ( !err ) {
-            winston.info('[emailer.smtp] Sent `' + data.template + '` email to uid ' + data.uid);
-        } else {
-            winston.warn('[emailer.smtp] Unable to send `' + data.template + '` email to uid ' + data.uid + '!!');
-            // winston.error('[emailer.smtp] ' + response.message);
-        }
-    });
+	if ( !username || !pass ) {
+		winston.error('[Yandex Emailer]' + 'Username and Password are required but not presented');
+	}
+
+	var options = {
+		debug: true,
+		host: 'smtp.yandex.ru',
+		port: 465,
+		secure: true,
+		auth: {
+			user: username,
+			pass: pass
+		}
+	};
+
+	var transport = nodemailer.createTransport(smtpTransport(options));
+	transport.sendMail({
+		from: data.from,
+		to: data.to,
+		html: data.html,
+		text: data.plaintext,
+		subject: data.subject
+	}, function(err, res) {
+		if (!err) {
+			winston.info('[Yandex Emailer] Sent `' + data.template + '` email to uid ' + data.uid);
+		} else {
+			winston.error('[Yandex Emailer] Unable to send `' + data.template + '` email to uid ' + data.uid + '!!' + ' The error: ' + err);
+			// winston.error('[emailer.smtp] ' + response.message);
+		}
+	});
 }
 
 Emailer.admin = {
-    menu: function(custom_header, callback) {
-        custom_header.plugins.push({
-            "route": '/emailers/local',
-            "icon": 'fa-envelope-o',
-            "name": 'Emailer (Local)'
-        });
+	menu: function(custom_header, callback) {
+		custom_header.plugins.push({
+			"route": '/emailers/local-yandex',
+			"icon": 'fa-envelope-o',
+			"name": 'Yandex Emailer'
+		});
 
-        callback(null, custom_header);
-    }
+		callback(null, custom_header);
+	}
 };
 
 module.exports = Emailer;

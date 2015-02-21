@@ -1,34 +1,34 @@
 {
-  "name": "nodebb-plugin-emailer-local",
-  "version": "0.2.0",
-  "description": "NodeBB plugin to send emails via an SMTP service",
-  "keywords": [
-    "nodebb",
-    "email",
-    "emailer",
-    "smtp"
-  ],
-  "homepage": "https://github.com/NodeBB/nodebb-plugin-emailer-local",
-  "bugs": {
-    "url": "http://github.com/NodeBB/nodebb-plugin-emailer-local/issues",
-    "email": "alfred@brvy.me"
-  },
-  "license": "MIT",
-  "author": {
-    "name": "Alfred Dobradi",
-    "email": "alfred@brvy.me",
-    "url": "http://blog.brvy.me"
-  },
-  "dependencies": {
-    "nodemailer": "~0.6.0",
-    "path": "~0.4.9"
-  },
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/NodeBB/nodebb-plugin-emailer-local.git"
-  },
-  "nbbpm": {
-    "compatibility": "^0.6.0"
-  }
+	"name": "nodebb-plugin-emailer-local-yandex",
+	"version": "0.2.1",
+	"description": "NodeBB plugin to send emails via Yandex SMTP service",
+	"keywords": [
+		"nodebb",
+		"email",
+		"emailer",
+		"smtp"
+	],
+	"homepage": "https://github.com/MegaGM/nodebb-plugin-emailer-local-yandex",
+	"bugs": {
+		"url": "https://github.com/MegaGM/nodebb-plugin-emailer-local-yandex/issues",
+		"email": "alfred@brvy.me"
+	},
+	"license": "MIT",
+	"author": {
+		"name": "Alfred Dobradi",
+		"email": "alfred@brvy.me",
+		"url": "http://blog.brvy.me"
+	},
+	"dependencies": {
+		"nodemailer": "^1.x",
+		"path": "^0.11.x"
+	},
+	"main": "index.js",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/MegaGM/nodebb-plugin-emailer-local-yandex.git"
+	},
+	"nbbpm": {
+		"compatibility": "^0.6.0"
+	}
 }
