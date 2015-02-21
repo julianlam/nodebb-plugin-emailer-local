@@ -26,7 +26,11 @@ Emailer.send = function(data) {
 			pass = wrapper.password;
 
 		if ( !username || !pass ) {
-			winston.error('[Yandex Emailer] Username and Password are required but not presented');
+			winston.error('[Yandex Emailer] Username and Password are required but not specified!');
+		}
+
+		if ( 'no-reply@localhost.lan' === data.from ) {
+			winston.error('[Yandex Emailer] "NodeBB ACP > Settings > Email" is required but not specified!');
 		}
 
 		var options = {
