@@ -1,11 +1,22 @@
+'use strict'
+
 var fs = require('fs'),
     path = require('path'),
-
     winston = module.parent.require('winston'),
+    async = module.parent.require('async'),
+    nconf = module.parent.require('nconf'),
     Meta = module.parent.require('./meta'),
+    User = module.parent.require('./user'),
+    Posts = module.parent.require('./posts'),
+    Topics = module.parent.require('./topics'),
+    Privileges = module.parent.require('./privileges'),
+    SocketPosts = module.parent.require('./socket.io/posts'),
 
     nodemailer = require('nodemailer'),
-    Emailer = {};
+    local,
+    Emailer = {
+      settings: {}
+    }
 
 
 Emailer.init = function(app, middleware, controllers) {
