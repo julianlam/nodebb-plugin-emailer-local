@@ -13,20 +13,20 @@
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group">
-									<label for="emailer:local:server">Outgoing SMTP Server</label>
-									<input placeholder="mail.example.com" type="text" class="form-control" id="emailer:local:server" name="emailer:local:server" />
+									<label for="server">Outgoing SMTP Server</label>
+									<input placeholder="mail.example.com" type="text" class="form-control" id="server" name="server" />
 								</div>
 								<div class="form-group">
-									<label for="emailer:local:port">Outgoing SMTP Port</label>
-									<input placeholder="465" type="text" class="form-control" id="emailer:local:port" name="emailer:local:port" />
+									<label for="port">Outgoing SMTP Port</label>
+									<input placeholder="465" type="text" class="form-control" id="port" name="port" />
 								</div>
 								<div class="form-group">
-									<label for="emailer:local:username">Username</label>
-									<input placeholder="" type="text" class="form-control" id="emailer:local:username" name="emailer:local:username" />
+									<label for="username">Username</label>
+									<input placeholder="" type="text" class="form-control" id="username" name="username" />
 								</div>
 								<div class="form-group">
-									<label for="emailer:local:password">Username</label>
-									<input placeholder="" type="text" class="form-control" id="emailer:local:password" name="emailer:local:password" />
+									<label for="password">Username</label>
+									<input placeholder="" type="text" class="form-control" id="password" name="password" />
 								</div>
 							</div>
 						</div>

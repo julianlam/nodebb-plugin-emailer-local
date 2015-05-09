@@ -3,42 +3,44 @@
 var fs = require('fs'),
     path = require('path'),
     winston = module.parent.require('winston'),
-    async = module.parent.require('async'),
-    nconf = module.parent.require('nconf'),
     Meta = module.parent.require('./meta'),
-    User = module.parent.require('./user'),
-    Posts = module.parent.require('./posts'),
-    Topics = module.parent.require('./topics'),
-    Privileges = module.parent.require('./privileges'),
-    SocketPosts = module.parent.require('./socket.io/posts'),
-
-    nodemailer = require('nodemailer'),
     local,
-    Emailer = {
-      settings: {}
-    }
+    config,
+    Emailer = {};
 
 
-Emailer.init = function(app, middleware, controllers) {
-    function renderAdminPage(req, res, next) {
-        res.render('admin/emailers/local', {});
-    }
+Emailer.init = function(data, callback) {
+    var render = function(req, res) {
+        res.render('admin/plugins/emailer-local', {});
+    };
 
-    app.get('/admin/emailers/local', middleware.admin.buildHeader, renderAdminPage);
-    app.get('/api/admin/emailers/local', renderAdminPage);
+    Meta.settings.get('local', function(err, settings) {
+        if (!err && settings && settings.server && settings.port && settings.username && settings.password) {
+            local = require('nodemailer');
+            config = settings;
+        } else {
+            winston.error('[plugins/emailer-local] SMTP not configured!');
+        }
+
+        data.router.get('/admin/plugins/emailer-local', data.middleware.admin.buildHeader, render);
+        data.router.get('/api/admin/plugins/emailer-local', render);
+
+        if (typeof callback === 'function') {
+            callback();
+        }
+    });
 };
 
 Emailer.send = function(data) {
-    var username = Meta.config['emailer:local:username'];
-    var pass = Meta.config['emailer:local:password'];
+  if (local) {
     var transportOptions = {
-        host: Meta.config['emailer:local:host'],
-        port: Meta.config['emailer:local:port']
+        host: Meta.config[config.server],
+        port: Meta.config[config.port]
     };
     if( username || pass ) {
         transportOptions.auth = {
-            user: username,
-            pass: pass
+            user: config.username,
+            pass: config.password
         };
     }
     var transport = nodemailer.createTransport('SMTP', transportOptions);
@@ -57,18 +59,21 @@ Emailer.send = function(data) {
             // winston.error('[emailer.smtp] ' + response.message);
         }
     });
+  } else {
+      winston.warn('[plugins/emailer-local] SMTP not configured, not sending email as Local object is not instantiated.');
+  }
 }
 
 Emailer.admin = {
-    menu: function(custom_header, callback) {
-        custom_header.plugins.push({
-            "route": '/emailers/local',
-            "icon": 'fa-envelope-o',
-            "name": 'Emailer (Local)'
-        });
+  menu: function(custom_header, callback) {
+      custom_header.plugins.push({
+          'route': '/plugins/emailer-local',
+          'icon': 'fa-envelope-o',
+          'name': 'Emailer (Mandrill)'
+      });
 
-        callback(null, custom_header);
-    }
+      callback(null, custom_header);
+  }
 };
 
 module.exports = Emailer;
