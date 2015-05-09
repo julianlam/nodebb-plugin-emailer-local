@@ -69,7 +69,7 @@ Emailer.admin = {
       custom_header.plugins.push({
           'route': '/plugins/emailer-local',
           'icon': 'fa-envelope-o',
-          'name': 'Emailer (Mandrill)'
+          'name': 'Emailer (Local)'
       });
 
       callback(null, custom_header);
