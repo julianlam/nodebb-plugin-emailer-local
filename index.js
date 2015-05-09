@@ -1,8 +1,6 @@
 'use strict'
 
-var fs = require('fs'),
-    path = require('path'),
-    winston = module.parent.require('winston'),
+var winston = module.parent.require('winston'),
     Meta = module.parent.require('./meta'),
     local,
     config,
@@ -33,25 +31,24 @@ Emailer.init = function(data, callback) {
 
 Emailer.send = function(data) {
   if (local) {
-    var transportOptions = {
-        host: Meta.config[config.server],
-        port: Meta.config[config.port]
-    };
-    if( username || pass ) {
-        transportOptions.auth = {
-            user: config.username,
-            pass: config.password
-        };
-    }
-    var transport = nodemailer.createTransport('SMTP', transportOptions);
 
-    transport.sendMail({
-        from: data.from,
-        to: data.to,
-        html: data.html,
-        text: data.plaintext,
-        subject: data.subject
-    },function(err,response) {
+    var transporter = nodemailer.createTransport({
+        host: config.server,
+        port: config.port,
+        auth: {
+          user: config.username,
+          pass: config.password
+        }
+    });
+    var mailOptions = {
+      from: data.from,
+      to: data.to,
+      html: data.html,
+      text: data.plaintext,
+      subject: data.subject
+    };
+
+    transporter.sendMail(mailOptions, function(error, info){
         if ( !err ) {
             winston.info('[emailer.smtp] Sent `' + data.template + '` email to uid ' + data.uid);
         } else {
