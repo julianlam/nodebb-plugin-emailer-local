@@ -25,8 +25,8 @@
 									<input placeholder="" type="text" class="form-control" id="username" name="username" />
 								</div>
 								<div class="form-group">
-									<label for="password">Username</label>
-									<input placeholder="" type="text" class="form-control" id="password" name="password" />
+									<label for="password">Password</label>
+									<input placeholder="" type="password" class="form-control" id="password" name="password" />
 								</div>
 							</div>
 						</div>
