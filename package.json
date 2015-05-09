@@ -20,7 +20,7 @@
         "url": "http://blog.brvy.me"
     },
     "dependencies": {
-        "nodemailer": "~1.3.4",
+        "nodemailer": "~1.3.4"
     },
     "main": "index.js",
     "repository": {
