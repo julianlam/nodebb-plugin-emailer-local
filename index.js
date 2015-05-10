@@ -55,7 +55,7 @@ Emailer.send = function(data) {
         if ( !err ) {
             winston.info('[emailer.smtp] Sent `' + data.template + '` email to uid ' + data.uid);
         } else {
-            winston.warn('[emailer.smtp] Unable to send `' + data.template + '` email to uid ' + data.uid + ', err = ' + err);
+            winston.warn('[emailer.smtp] Unable to send `' + data.template + '` email to uid ' + data.uid + ', err = ' + err + ', settings = ' + transportOptions + ' mail = ' + mailOptions);
             // winston.error('[emailer.smtp] ' + response.message);
         }
     });
