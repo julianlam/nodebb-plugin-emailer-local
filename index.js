@@ -1,63 +1,79 @@
-var fs = require('fs'),
-    path = require('path'),
+'use strict'
 
-    winston = module.parent.require('winston'),
+var winston = module.parent.require('winston'),
     Meta = module.parent.require('./meta'),
-
-    nodemailer = require('nodemailer'),
+    nodemailer,
+    config,
     Emailer = {};
 
 
-Emailer.init = function(app, middleware, controllers) {
-    function renderAdminPage(req, res, next) {
-        res.render('admin/emailers/local', {});
-    }
+Emailer.init = function(data, callback) {
+    var render = function(req, res) {
+        res.render('admin/plugins/emailer-local', {});
+    };
 
-    app.get('/admin/emailers/local', middleware.admin.buildHeader, renderAdminPage);
-    app.get('/api/admin/emailers/local', renderAdminPage);
+    Meta.settings.get('local', function(err, settings) {
+        if (!err && settings && settings.host && settings.port && settings.username && settings.password) {
+            nodemailer = require('nodemailer');
+            config = settings;
+        } else {
+            winston.error('[plugins/emailer-local] SMTP not configured!');
+        }
+
+        data.router.get('/admin/plugins/emailer-local', data.middleware.admin.buildHeader, render);
+        data.router.get('/api/admin/plugins/emailer-local', render);
+
+        if (typeof callback === 'function') {
+            callback();
+        }
+    });
 };
 
 Emailer.send = function(data) {
-    var username = Meta.config['emailer:local:username'];
-    var pass = Meta.config['emailer:local:password'];
-    var transportOptions = {
-        host: Meta.config['emailer:local:host'],
-        port: Meta.config['emailer:local:port']
-    };
-    if( username || pass ) {
-        transportOptions.auth = {
-            user: username,
-            pass: pass
-        };
-    }
-    var transport = nodemailer.createTransport('SMTP', transportOptions);
+  if (nodemailer) {
 
-    transport.sendMail({
-        from: data.from,
-        to: data.to,
-        html: data.html,
-        text: data.plaintext,
-        subject: data.subject
-    },function(err,response) {
+    var transportOptions = {
+      host: config.host,
+      port: config.port,
+      auth: {
+        user: config.username,
+        pass: config.password
+      }
+    };
+
+    var transporter = nodemailer.createTransport(transportOptions);
+
+    var mailOptions = {
+      from: data.from,
+      to: data.to,
+      html: data.html,
+      text: data.text,
+      subject: data.subject
+    };
+
+    transporter.sendMail(mailOptions, function(err, info){
         if ( !err ) {
             winston.info('[emailer.smtp] Sent `' + data.template + '` email to uid ' + data.uid);
         } else {
-            winston.warn('[emailer.smtp] Unable to send `' + data.template + '` email to uid ' + data.uid + '!!');
+            winston.warn('[emailer.smtp] Unable to send `' + data.template + '` email to uid ' + data.uid + ', err = ' + err);
             // winston.error('[emailer.smtp] ' + response.message);
         }
     });
+  } else {
+      winston.warn('[plugins/emailer-local] SMTP not configured, not sending email as Local object is not instantiated.');
+  }
 }
 
 Emailer.admin = {
-    menu: function(custom_header, callback) {
-        custom_header.plugins.push({
-            "route": '/emailers/local',
-            "icon": 'fa-envelope-o',
-            "name": 'Emailer (Local)'
-        });
+  menu: function(custom_header, callback) {
+      custom_header.plugins.push({
+          'route': '/plugins/emailer-local',
+          'icon': 'fa-envelope-o',
+          'name': 'Emailer (Local)'
+      });
 
-        callback(null, custom_header);
-    }
+      callback(null, custom_header);
+  }
 };
 
 module.exports = Emailer;
