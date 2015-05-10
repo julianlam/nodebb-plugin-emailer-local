@@ -47,8 +47,13 @@ Emailer.send = function(data) {
       text: data.text,
       subject: data.subject
     };
+    to: data.to,
+    subject: data.subject,
+    from: data.from,
+    text: data.text,
+    html: data.html
 
-    transporter.sendMail(mailOptions, function(error, info){
+    transporter.sendMail(mailOptions, function(err, info){
         if ( !err ) {
             winston.info('[emailer.smtp] Sent `' + data.template + '` email to uid ' + data.uid);
         } else {
