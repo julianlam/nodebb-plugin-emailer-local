@@ -15,9 +15,9 @@
     },
     "license": "MIT",
     "author": {
-        "name": "Alfred Dobradi",
-        "email": "alfred@brvy.me",
-        "url": "http://blog.brvy.me"
+        "name": "Alfred Dobradi, Jbob",
+        "email": "alfred@brvy.me", contact@jbob.io,
+        "url": "http://blog.brvy.me", NA,
     },
     "dependencies": {
         "nodemailer": "~1.3.4"
