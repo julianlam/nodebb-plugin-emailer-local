@@ -2,7 +2,7 @@
 
 var winston = module.parent.require('winston'),
     Meta = module.parent.require('./meta'),
-    local,
+    nodemailer,
     config,
     Emailer = {};
 
@@ -13,8 +13,8 @@ Emailer.init = function(data, callback) {
     };
 
     Meta.settings.get('local', function(err, settings) {
-        if (!err && settings && settings.server && settings.port && settings.username && settings.password) {
-            local = require('nodemailer');
+        if (!err && settings && settings.host && settings.port && settings.username && settings.password) {
+            nodemailer = require('nodemailer');
             config = settings;
         } else {
             winston.error('[plugins/emailer-local] SMTP not configured!');
@@ -30,10 +30,10 @@ Emailer.init = function(data, callback) {
 };
 
 Emailer.send = function(data) {
-  if (local) {
+  if (nodemailer) {
 
     var transporter = nodemailer.createTransport({
-        host: config.server,
+        host: config.host,
         port: config.port,
         auth: {
           user: config.username,
@@ -44,7 +44,7 @@ Emailer.send = function(data) {
       from: data.from,
       to: data.to,
       html: data.html,
-      text: data.plaintext,
+      text: data.text,
       subject: data.subject
     };
 

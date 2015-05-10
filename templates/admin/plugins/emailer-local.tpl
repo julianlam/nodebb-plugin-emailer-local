@@ -13,11 +13,11 @@
 						<div class="row">
 							<div class="col-sm-6">
 								<div class="form-group">
-									<label for="server">Outgoing SMTP Server</label>
-									<input placeholder="mail.example.com" type="text" class="form-control" id="server" name="server" />
+									<label for="host">SMTP Host</label>
+									<input placeholder="mail.example.com" type="text" class="form-control" id="host" name="host" />
 								</div>
 								<div class="form-group">
-									<label for="port">Outgoing SMTP Port</label>
+									<label for="port">SMTP Port</label>
 									<input placeholder="465" type="text" class="form-control" id="port" name="port" />
 								</div>
 								<div class="form-group">
