@@ -47,11 +47,6 @@ Emailer.send = function(data) {
       text: data.text,
       subject: data.subject
     };
-    to: data.to,
-    subject: data.subject,
-    from: data.from,
-    text: data.text,
-    html: data.html
 
     transporter.sendMail(mailOptions, function(err, info){
         if ( !err ) {
