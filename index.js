@@ -32,14 +32,17 @@ Emailer.init = function(data, callback) {
 Emailer.send = function(data) {
   if (nodemailer) {
 
-    var transporter = nodemailer.createTransport({
-        host: config.host,
-        port: config.port,
-        auth: {
-          user: config.username,
-          pass: config.password
-        }
-    });
+    var transportOptions = {
+      host: config.host,
+      port: config.port,
+      auth: {
+        user: config.username,
+        pass: config.password
+      }
+    };
+
+    var transporter = nodemailer.createTransport(transportOptions);
+
     var mailOptions = {
       from: data.from,
       to: data.to,
@@ -52,7 +55,7 @@ Emailer.send = function(data) {
         if ( !err ) {
             winston.info('[emailer.smtp] Sent `' + data.template + '` email to uid ' + data.uid);
         } else {
-            winston.warn('[emailer.smtp] Unable to send `' + data.template + '` email to uid ' + data.uid + '!!');
+            winston.warn('[emailer.smtp] Unable to send `' + data.template + '` email to uid ' + data.uid + ', err = ' + err);
             // winston.error('[emailer.smtp] ' + response.message);
         }
     });
