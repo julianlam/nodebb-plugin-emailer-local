@@ -5,6 +5,9 @@
 	"description": "Allows NodeBB to send emails via Yandex SMTP",
 	"library": "./index.js",
 	"templates": "./templates",
+	"nbbpm": {
+		"compatibility": "^0.8.0"
+	},
 	"hooks": [
 		{ "hook": "action:email.send", "method": "send" },
 		{ "hook": "filter:admin.header.build", "method": "admin.menu" },

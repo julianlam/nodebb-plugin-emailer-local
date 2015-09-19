@@ -1,6 +1,6 @@
 {
 	"name": "nodebb-plugin-emailer-yandex",
-	"version": "0.2.3",
+	"version": "0.2.4",
 	"description": "NodeBB plugin to send emails via Yandex SMTP service",
 	"keywords": [
 		"nodebb",
