@@ -1,35 +1,35 @@
 {
-	"name": "nodebb-plugin-emailer-yandex",
-	"version": "0.2.4",
-	"nbbpm": {
-		"compatibility": "^0.7.1 || ^0.8.0"
-	},
-	"description": "NodeBB plugin to send emails via Yandex SMTP service",
-	"keywords": [
-		"nodebb",
-		"email",
-		"emailer",
-		"yandex",
-		"smtp"
-	],
-	"homepage": "https://github.com/MegaGM/nodebb-plugin-emailer-yandex",
-	"bugs": {
-		"url": "https://github.com/MegaGM/nodebb-plugin-emailer-yandex/issues",
-		"email": "alfred@brvy.me"
-	},
-	"license": "MIT",
-	"author": {
-		"name": "Alfred Dobradi",
-		"email": "alfred@brvy.me",
-		"url": "http://blog.brvy.me"
-	},
-	"dependencies": {
-		"nodemailer": "^1.x",
-		"nodemailer-smtp-transport": "1.0.0"
-	},
-	"main": "index.js",
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/MegaGM/nodebb-plugin-emailer-local-yandex.git"
-	}
+  "name": "nodebb-plugin-emailer-yandex",
+  "version": "0.2.5",
+  "nbbpm": {
+    "compatibility": "^0.7.1 || ^0.8.0"
+  },
+  "description": "NodeBB plugin to send emails via Yandex SMTP service",
+  "keywords": [
+    "nodebb",
+    "email",
+    "emailer",
+    "yandex",
+    "smtp"
+  ],
+  "homepage": "https://github.com/MegaGM/nodebb-plugin-emailer-yandex",
+  "bugs": {
+    "url": "https://github.com/MegaGM/nodebb-plugin-emailer-yandex/issues",
+    "email": "alfred@brvy.me"
+  },
+  "license": "MIT",
+  "author": {
+    "name": "Alfred Dobradi",
+    "email": "alfred@brvy.me",
+    "url": "http://blog.brvy.me"
+  },
+  "dependencies": {
+    "nodemailer": "^1.x",
+    "nodemailer-smtp-transport": "1.0.0"
+  },
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/MegaGM/nodebb-plugin-emailer-local-yandex.git"
+  }
 }
